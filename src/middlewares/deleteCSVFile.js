@@ -1,9 +1,12 @@
 const fs = require('fs');
 
-module.exports.deleteCSVFile = (req, res, next) => {
-    const { filePath } = req;
+module.exports.deleteCSVFile = (req, res) => {
+  const { filePath, uploadId } = req;
 
-    fs.unlinkSync(filePath)
+  fs.unlinkSync(filePath);
 
-    res.send({success:true})
-}
+  res.send({
+    success: true,
+    uploadId,
+  });
+};

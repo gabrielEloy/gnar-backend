@@ -1,4 +1,4 @@
-const csv = require('fast-csv')
+const csv = require('fast-csv');
 
 /* const validateCsv = require('./validateCsv') */
 
@@ -10,25 +10,25 @@ const readCSV = async ({ readableStream, onValidData, onEnd }) => {
       'clock_in',
       'clock_out',
     ],
-  })
+  });
 
   return new Promise((resolve, reject) => {
-    const errors = []
-    let index = 0
+    const errors = [];
+    let index = 0;
 
     writer
       .on('data', (data) => {
         if (index !== 0) {
-          onValidData(data)
+          onValidData(data);
         }
-        index++
+        index += 1;
       })
       .on('error', reject)
       .on('end', () => {
-        onEnd()
-        resolve({ errors })
-      })
-  })
-}
+        onEnd();
+        resolve({ errors });
+      });
+  });
+};
 
-module.exports = readCSV
+module.exports = readCSV;
